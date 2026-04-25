@@ -2,194 +2,193 @@
 
 <p align="center">
   <img src="https://img.shields.io/badge/Python-3.11+-blue?style=flat-square&logo=python&logoColor=white" alt="Python">
-  <img src="https://img.shields.io/badge/License-MIT-green?style=flat-square" alt="License">
-  <img src="https://img.shields.io/badge/Status-Active-orange?style=flat-square" alt="Status">
+  <img src="https://img.shields.io/badge/License-MIT-green?style=flat-square" alt="Licenca">
+  <img src="https://img.shields.io/badge/Status-Ativo-orange?style=flat-square" alt="Status">
 </p>
 
 ---
 
-## WARNING
+## Aviso
 
-**VOIDCRYPT IS AN EDUCATIONAL SECURITY TOOL.** 
+**VOIDCRYPT E UMA FERRAMENTA EDUCACIONAL DE SEGURANCA.**
 
-This software is provided for **legitimate privacy protection** purposes only. Always:
-- Ensure you have legal authority to encrypt files you own
-- Keep backups of your passwords - encrypted files cannot be recovered without them
-- Test with non-critical files first before using with important data
+Este software e fornecido somente para fins de **protecao legitima de privacidade**. Sempre:
+
+- Garanta que voce tem autorizacao legal para criptografar os arquivos em questao
+- Guarde backups das suas senhas, pois arquivos criptografados nao podem ser recuperados sem elas
+- Teste primeiro com arquivos nao criticos antes de usar com dados importantes
 
 ---
 
-## Overview
+## Visao Geral
 
-VoidCrypt is a professional-grade CLI file encryption utility inspired by tools like VeraCrypt. It implements **military-grade cryptography** with modern best practices for securing sensitive files locally.
+VoidCrypt e um utilitario CLI de criptografia de arquivos inspirado por ferramentas como VeraCrypt. Ele implementa criptografia moderna para proteger arquivos sensiveis localmente.
 
-### Core Philosophy
+### Filosofia Principal
 
+```text
+Trave. Oculte. Apague.
 ```
-Lock. Hide. Erase.
-```
 
-VoidCrypt provides confidential file encryption using authenticated encryption (AES-256-GCM) with memory-hard key derivation (Argon2id) to protect against brute-force and GPU-based attacks.
+VoidCrypt oferece criptografia confidencial de arquivos usando criptografia autenticada (AES-256-GCM) com derivacao de chave PBKDF2-HMAC-SHA256 para aumentar a resistencia contra ataques de forca bruta.
 
 ---
 
-## Features
+## Recursos
 
-### Encryption
-- **AES-256-GCM** - Industry-standard authenticated encryption
-- **PBKDF2-HMAC-SHA256** - Secure key derivation (600k iterations)
-- **Unique nonce per file** - No reusable IVs
-- **Secure randomness** - Uses `os.urandom` for all cryptographic random values
+### Criptografia
 
-### File Format
-- **Custom binary format** - Structured encrypted file format
-- **Optional filename hiding** - Strip original filename from metadata
-- **Integrity verification** - Authentication tag prevents tampering
+- **AES-256-GCM** - Criptografia autenticada padrao da industria
+- **PBKDF2-HMAC-SHA256** - Derivacao de chave segura com 600 mil iteracoes
+- **Nonce unico por arquivo** - Sem IVs reutilizaveis
+- **Aleatoriedade segura** - Usa `os.urandom` para todos os valores criptograficos aleatorios
 
-### CLI Interface
-- **Rich terminal UI** - Colorized output with progress bars
-- **Password masking** - Hidden input using getpass
-- **Status messages** - Clear feedback on operations
+### Formato de Arquivo
 
-### Security Options
-- **Random filename output** - Generate untraceable filenames
-- **Secure shred simulation** - Overwrite original with random data
-- **Attempt limiting** - Optional self-destruct after failed attempts
+- **Formato binario proprio** - Estrutura organizada para arquivos criptografados
+- **Ocultacao opcional do nome do arquivo** - Remove o nome original dos metadados
+- **Verificacao de integridade** - A tag de autenticacao impede alteracoes silenciosas
+
+### Interface CLI
+
+- **UI rica no terminal** - Saida colorida com barras de progresso
+- **Mascaramento de senha** - Entrada oculta usando `getpass`
+- **Mensagens de status** - Retorno claro sobre cada operacao
+
+### Opcoes de Seguranca
+
+- **Nome de saida aleatorio** - Gera nomes de arquivo menos rastreaveis
+- **Simulacao de apagamento seguro** - Sobrescreve o arquivo original com dados aleatorios
+- **Limite de tentativas** - Opcao de autodestruicao apos tentativas falhas
 
 ---
 
-## Installation
+## Instalacao
 
-### Prerequisites
+### Pre-requisitos
 
 ```bash
-# Python 3.11 or higher required
+# Python 3.11 ou superior
 python --version
 ```
 
-### Install Dependencies
+### Instalar Dependencias
 
 ```bash
 pip install -r requirements.txt
 ```
 
-### Quick Start
+### Inicio Rapido
 
 ```bash
-# Encrypt a file
-python -m voidcrypt.cli.main encrypt secret_document.pdf
+# Criptografar um arquivo
+python -m voidcrypt.cli.main encrypt documento_secreto.pdf
 
-# Encrypt with random filename
-python -m voidcrypt.cli.main encrypt secret.pdf -r
+# Criptografar com nome de arquivo aleatorio
+python -m voidcrypt.cli.main encrypt secreto.pdf -r
 
-# Decrypt a file  
-python -m voidcrypt.cli.main decrypt secret_document.pdf.void
+# Descriptografar um arquivo
+python -m voidcrypt.cli.main decrypt documento_secreto.pdf.void
 
-# View encrypted file info
-python -m voidcrypt.cli.main info secret_document.pdf.void
+# Ver informacoes do arquivo criptografado
+python -m voidcrypt.cli.main info documento_secreto.pdf.void
 ```
 
 ---
 
-## Usage Examples
+## Exemplos de Uso
 
-### Basic Encryption
+### Criptografia Basica
 
 ```bash
-$ python -m voidcrypt.cli.main encrypt mysecret.txt
+$ python -m voidcrypt.cli.main encrypt segredo.txt
 Enter password: ********
 Confirm password: ********
-✓ Encryption complete: mysecret.txt.void
+OK Encryption complete: segredo.txt.void
 ```
 
-### With Options
+### Com Opcoes
 
 ```bash
-# Random filename, shred original after encrypting
-$ python -m voidcrypt.cli.main encrypt confidential.pdf -r -s
+# Nome aleatorio e apagamento do original apos criptografar
+$ python -m voidcrypt.cli.main encrypt confidencial.pdf -r -s
 Enter password: ********
 Confirm password: ********
-✓ Encryption complete: a3f8c2d1e5b6...4a7f.void
+OK Encryption complete: a3f8c2d1e5b6...4a7f.void
 ```
 
-### Decryption
+### Descriptografia
 
 ```bash
-$ python -m voidcrypt.cli.main decrypt mysecret.txt.void
+$ python -m voidcrypt.cli.main decrypt segredo.txt.void
 Enter password: ********
-✓ Decryption complete: mysecret.txt
+OK Decryption complete: segredo.txt
 ```
 
-### File Information
+### Informacoes do Arquivo
 
 ```bash
-$ python -m voidcrypt.cli.main info mysecret.txt.void
+$ python -m voidcrypt.cli.main info segredo.txt.void
 
-┌─────────────────────────────────────┐
-│       Voidcrypt File Info             │
-├─────────────────────────────────────┤
-│ File            │ mysecret.txt.void   │
-│ Size            │ 24.50 KB          │
-│ Version        │ 1                 │
-│ Original Name  │ mysecret.txt       │
-│ Original Size │ 1.02 KB          │
-└─────────────────────────────────────┘
++--------------------------------------+
+|       Informacoes do VoidCrypt       |
++--------------------------------------+
+| Arquivo        | segredo.txt.void    |
+| Tamanho        | 24.50 KB            |
+| Versao         | 1                   |
+| Nome Original  | segredo.txt         |
+| Tam. Original  | 1.02 KB             |
++--------------------------------------+
 ```
 
 ---
 
-## Cryptographic Design
+## Design Criptografico
 
-### Encryption Scheme
+### Esquema de Criptografia
 
-| Component | Value |
-|-----------|-------|
-| Algorithm | AES-256-GCM |
-| Key Size | 256-bit (32 bytes) |
-| Nonce Size | 96-bit (12 bytes) |
-| Tag Size | 128-bit (16 bytes) |
-| Mode | Authenticated Encryption |
+| Componente | Valor |
+|------------|-------|
+| Algoritmo | AES-256-GCM |
+| Tamanho da chave | 256 bits (32 bytes) |
+| Tamanho do nonce | 96 bits (12 bytes) |
+| Tamanho da tag | 128 bits (16 bytes) |
+| Modo | Criptografia autenticada |
 
-### Key Derivation
+### Derivacao de Chave
 
-| Parameter | Value |
+| Parametro | Valor |
 |-----------|-------|
 | KDF | PBKDF2-HMAC-SHA256 |
-| Iterations | 600,000 |
+| Iteracoes | 600.000 |
 | Hash | SHA-256 |
-| Salt Size | 256-bit (32 bytes) |
+| Tamanho do salt | 256 bits (32 bytes) |
 
-### Why These Choices?
+### Por Que Essas Escolhas?
 
-- **AES-GCM**: Provides both confidentiality AND integrity in one operation. The authentication tag ensures any tampering is detected.
-- **PBKDF2-HMAC-SHA256**: Industry-standard key derivation with high iteration count for brute-force resistance.
-- **Unique nonces**: Each encryption uses fresh random values, preventing pattern analysis.
+- **AES-GCM**: fornece confidencialidade e integridade em uma unica operacao. A tag de autenticacao garante que adulteracoes sejam detectadas.
+- **PBKDF2-HMAC-SHA256**: derivacao de chave amplamente usada, com alto numero de iteracoes para dificultar forca bruta.
+- **Nonces unicos**: cada criptografia usa valores aleatorios novos, reduzindo risco de analise por padroes.
 
 ---
 
-## File Format
+## Formato do Arquivo
 
-Encrypted files use a custom binary format:
+Arquivos criptografados usam um formato binario proprio:
 
-```
-┌──────────────────────────────────────────────────────┐
-│  MAGIC HEADER     │ 4 bytes  │ "VOID"                  │
-├──────────────────────────────────────────────────────┤
-│  VERSION        │ 4 bytes  │ Format version (1)      │
-├──────────────────────────────────────────────────────┤
-│  SALT           │ 16 bytes │ Argon2 salt              │
-├──────────────────────────────────────────────────────┤
-│  NONCE          │ 12 bytes │ AES-GCM nonce           │
-├──────────────────────────────────────────────────────┤
-│  TAG            │ 16 bytes │ Authentication tag       │
-├──────────────────────────────────────────────────────┤
-│  METADATA       │ 256 bytes│ JSON metadata          │
-├──────────────────────────────────────────────────────┤
-│  CIPHERTEXT     │ N bytes  │ Encrypted data        │
-└──────────────────────────────────────────────────────┘
+```text
++----------------+----------+------------------------+
+| MAGIC HEADER   | 4 bytes  | "VOID"                 |
+| VERSION        | 4 bytes  | Versao do formato (1)  |
+| SALT           | 32 bytes | Salt do PBKDF2         |
+| NONCE          | 12 bytes | Nonce do AES-GCM       |
+| TAG            | 16 bytes | Tag de autenticacao    |
+| METADATA       | 256 bytes| Metadados JSON         |
+| CIPHERTEXT     | N bytes  | Dados criptografados   |
++----------------+----------+------------------------+
 ```
 
-### Metadata Structure
+### Estrutura dos Metadados
 
 ```json
 {
@@ -201,63 +200,66 @@ Encrypted files use a custom binary format:
 
 ---
 
-## Security Considerations
+## Consideracoes de Seguranca
 
-### Strengths
-- Authenticated encryption prevents tampering
-- Argon2id provides strong GPU/ASIC resistance
-- No password reuse across different files
-- Fresh random values per encryption
+### Pontos Fortes
 
-### Limitations
-- **No password recovery** - Lost passwords = lost data
-- **Windows-only secure delete** - OS-level file recovery may still be possible
-- **Memory exposure** - Passwords may remain in memory
+- Criptografia autenticada evita adulteracoes silenciosas
+- PBKDF2-HMAC-SHA256 com 600 mil iteracoes aumenta o custo de ataques de forca bruta
+- Salt e nonce novos a cada criptografia
+- Valores aleatorios novos para cada arquivo
 
-### Best Practices
+### Limitacoes
 
-1. **Use strong passwords** - Minimum 12 characters with mixed case, numbers, symbols
-2. **Keep backups** - Always have copies of important files
-3. **Test first** - Verify encryption/decryption works before deleting originals
-4. **Don't forget passwords** - No recovery mechanism exists
+- **Sem recuperacao de senha** - Senha perdida significa dados perdidos
+- **Apagamento seguro e limitado** - Recuperacao em nivel de sistema operacional ou armazenamento ainda pode ser possivel
+- **Exposicao em memoria** - Senhas podem permanecer temporariamente na memoria do processo
+
+### Boas Praticas
+
+1. **Use senhas fortes** - No minimo 12 caracteres com letras maiusculas, minusculas, numeros e simbolos
+2. **Mantenha backups** - Sempre tenha copias dos arquivos importantes
+3. **Teste primeiro** - Verifique se criptografia e descriptografia funcionam antes de apagar originais
+4. **Nao esqueca as senhas** - Nao existe mecanismo de recuperacao
 
 ---
 
-## Project Structure
+## Estrutura do Projeto
 
-```
+```text
 voidcrypt/
-├── core/
-│   ├── crypto.py       # AES-256-GCM + Argon2 implementation
-│   ├── file_handler.py # File I/O with progress tracking
-│   ├── format.py     # Custom binary format
-│   └── utils.py     # Logging and utilities
-├── cli/
-│   ├── main.py       # CLI entry point
-│   └── commands.py  # Command implementations
-├── config/
-│   └── settings.py  # Configuration
-├── tests/
-│   └── test_crypto.py
-├── requirements.txt
-├── run.py
-└── README.md
+|-- core/
+|   |-- crypto.py       # Implementacao AES-256-GCM + PBKDF2
+|   |-- file_handler.py # I/O de arquivos com progresso
+|   |-- format.py       # Formato binario proprio
+|   `-- utils.py        # Logs e utilitarios
+|-- cli/
+|   |-- main.py         # Ponto de entrada da CLI
+|   `-- commands.py     # Implementacao dos comandos
+|-- config/
+|   `-- settings.py     # Configuracoes
+|-- tests/
+|   `-- test_crypto.py
+|-- requirements.txt
+|-- run.py
+`-- README.md
 ```
 
 ---
 
-## Testing
+## Testes
 
 ```bash
-# Run unit tests
+# Rodar testes unitarios
 python -m pytest tests/
 
-# Or run directly
+# Ou executar diretamente
 python -m voidcrypt.tests.test_crypto
 ```
 
-Expected output:
-```
+Saida esperada:
+
+```text
 .....
 ----------------------------------------------------------------------
 Ran 5 tests in 2.451s
@@ -267,39 +269,40 @@ OK
 
 ---
 
-## Dependencies
+## Dependencias
 
-| Package | Purpose |
-|---------|----------|
-| cryptography | AES-GCM encryption |
-| argon2-cffi | Argon2 key derivation |
-| rich | Terminal UI |
-
----
-
-## License
-
-MIT License - See LICENSE file for details.
+| Pacote | Finalidade |
+|--------|------------|
+| cryptography | Criptografia AES-GCM |
+| argon2-cffi | Dependencia listada no projeto |
+| rich | Interface no terminal |
 
 ---
 
-## Disclaimer
+## Licenca
 
-THIS SOFTWARE IS PROVIDED "AS IS" WITHOUT WARRANTY OF ANY KIND. USE AT YOUR OWN RISK. THE AUTHORS DISCLAIM ALL LIABILITY FOR ANY DAMAGES RESULTING FROM USE OF THIS SOFTWARE.
-
-This tool is intended for legitimate privacy protection. Always comply with applicable laws and regulations in your jurisdiction.
+Licenca MIT. Consulte o arquivo LICENSE para mais detalhes.
 
 ---
 
-## Credits
+## Aviso Legal
 
-Inspired by:
+ESTE SOFTWARE E FORNECIDO "COMO ESTA", SEM GARANTIA DE QUALQUER TIPO. USE POR SUA CONTA E RISCO. OS AUTORES NAO SE RESPONSABILIZAM POR DANOS RESULTANTES DO USO DESTE SOFTWARE.
+
+Esta ferramenta e destinada a protecao legitima de privacidade. Sempre cumpra as leis e regulamentacoes aplicaveis na sua jurisdicao.
+
+---
+
+## Creditos
+
+Inspirado por:
+
 - VeraCrypt
 - SQLCipher
-- Password Hashing Competition winners
+- Vencedores da Password Hashing Competition
 
 ---
 
 <p align="center">
-  <sub>Created for educational and legitimate privacy protection purposes.</sub>
+  <sub>Criado para fins educacionais e de protecao legitima de privacidade.</sub>
 </p>
