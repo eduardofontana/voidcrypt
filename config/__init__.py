@@ -1,0 +1,1 @@
+"""VoidCrypt Config Package"""

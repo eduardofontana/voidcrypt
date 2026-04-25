@@ -1,0 +1,1 @@
+"""VoidCrypt Core Package"""
